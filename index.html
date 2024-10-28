@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Answers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8, #e1e9ef);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center; /* Center align logos and title */
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            max-width: 100px; /* Set max width for logos */
+            margin: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #007BFF;
+            border-radius: 5px;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #0056b3;
+            outline: none;
+        }
+
+        .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e1e9ef;
+            transition: background 0.3s;
+        }
+
+        .task:last-child {
+            border-bottom: none;
+        }
+
+        .task:hover {
+            background: #f9f9f9;
+        }
+
+        .task span {
+            font-size: 1.1em;
+            flex-grow: 1;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            animation: slideIn 0.5s ease, fadeOut 0.5s 2.5s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                bottom: -50px;
+                opacity: 0;
+            }
+            to {
+                bottom: 20px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://static6.tgstat.ru/channels/_0/45/456fec985fea7db5e2caf1899719c016.jpg" alt="Hahu Crypto Logo" class="logo">
+        <img src="https://cdn4.cdn-telegram.org/file/b2HD3GAjFL9ddQINdcyT3eegD1aNcL9E13BfRjXT6M6tWZLIYLMRSjq5OExUKvjr_pZGpWEiQGVsJgraFByiikO3B7LG399Op2u4WMUy-DJslNqI5EN1ewLt38FZj22fbYaLDYFosbJKR3PAH828VxQ1w7sZqEMNFxF9U7_VWNDSu2joCMFsgLd-jLxc4Up1KLLI84X63rIf3SK0NS5uudbmKglxRztLz-_1w6Nm71rVrFZhJvmGtRiOipYwHkl9mEZK_RdoZlnjmOQAU22P7j_smaLO9XN9PBXfVqeJmECmSwXqq-9u9eej7_8qeXL7VBzRv7PzcHHOfl_JDZgkGw.jpg" alt="Tapswap Logo" class="logo">
+        <h1>Tapswap Cenima Codes</h1>
+        <input type="text" id="search" placeholder="Search for tasks..." onkeyup="searchTasks()">
+        <div id="task-list"></div>
+        <footer>
+            <p>Powered by Hahu Crypto</p>
+        </footer>
+    </div>
+    <script>
+        const tasks = [
+    { task: 'Crypto scandals and triumphs', code: '739002' },
+    { task: 'Tapswap news: highlights from the AMA session on TON\'s space', code: '5' },
+    { task: 'Why did Tapswap change the blockchain?', code: '548719' },
+    { task: 'Tapswap Education: Bitcoin and altcoin', code: '030072' },
+    { task: 'New in the crypto world', code: '739551' },
+    { task: '5 main crypto terms in 5mins', code: '2614907' },
+    { task: 'Tapswap Education: The most famous cryptocurrency', code: 'D57U94' },
+    { task: 'How you can make money when crypto falling?', code: 'genesis' },
+    { task: 'Drops and rises in the crypto world', code: '27F53K9' },
+    { task: '5 easy ways to make money on crypto', code: 'encryption' },
+    { task: 'Tapswap Education: Memes and cryptocurrencies', code: '4D80N74' },
+    { task: 'How to get started in crypto without investments?', code: 'TRIBALISM' },
+    { task: '8 Warren Buffet rules in 8 mins', code: 'ABENOMICS' },
+    { task: 'Tapswap Education: Fake news and real news', code: 'G5D73H20' },
+    { task: 'Cryptocurrency worldwide news!', code: '3PM71AK03X' },
+    { task: 'How to buy crypto in 2024?', code: 'delisting' },
+    { task: '10 crypto terms in 5mins', code: 'collateral' },
+    { task: 'Tapswap: curious facts', code: 'L6SE704V81' },
+    { task: 'How cryptocurrency and money actually works', code: 'fibonacci' },
+    { task: 'Tapswap: curious facts. Top 7 most expensive NFT', code: 'F35K90V3' },
+    { task: 'What is bitcoin? The simplest explanation', code: 'liveness' },
+    { task: 'Hot crypto news: Ethereum ETFs', code: '5J6OL847G7' },
+    { task: 'The most dangerous crypto scams you should know about!', code: 'RANSOMWARE' },
+    { task: 'Tapswap education: Can you earn 1 bitcoin per day? How bitcoin mining works.', code: '4K7U6E10G7' },
+    { task: 'What are NFTs and why they cost millions?', code: 'tardigrade' },
+    { task: 'Lunch Dates, Token Conversion, Mining, and Future Features!', code: 'F9L34V5A' },
+    { task: 'How Elon Musk impacts crypto', code: 'unbanked' },
+    { task: 'Financial face-off: Bitcoin custody vs Bank accounts', code: 'D5784VHPC377' },
+    { task: '7 AI tools that will make you rich', code: 'infinite' },
+    { task: 'The dark side of crypto: Top 8 cyber attacks and how to prevent them', code: '5SP670KR66' },
+    { task: 'Crypto is not real money! Will cryptocurrency REPLACE fiat money?', code: 'parachain' },
+    { task: 'Unlocking the future: The power of trio of blockchain, IoT and AI', code: 'D772WQ9Z5' },
+    { task: 'How to make $1 Million as a TEENAGER (30 Money Tips)', code: 'instamine' },
+    { task: 'USDT vs USDC: The ultimate stable coin showdown', code: '7N008TQ31V' },
+    { task: 'Without this knowledge you WILL NOT MAKE MONEY in crypto! Crypto explanation for BEGINNERS', code: 'WebSocket' },
+    { task: 'Crypto revolution: Pay with crypto using debit cards', code: '0TJN63R97A' },
+    { task: 'The Best Crypto Portfolio for 2024! (LAST CHANCE BEFORE BULL RUN)', code: 'unstoppable' },
+    { task: 'Top 15 crypto news: What is the hottest? Bitcoin, USDT', code: '3KKLF7JO5' },
+    { task: 'Make 10x On Crypto', code: 'Onchain' },
+    { task: 'Bitcoin integration to the real life: new digital gold', code: '547JL6AM7R' },
+    { task: 'Earn on Airdrops', code: 'tendermint' },
+    { task: 'Delicious crypto news: Ethereum ETF, Tether on TON, Dogecoin\'s Real world impact', code: 'Q7P9N3VD' },
+    { task: '10 Passive Income Ideas - How I Earn $1,271 A Day!', code: 'renewable' },
+    { task: 'Top 10 bitcoin whales: The biggest bitcoin holders revealed!', code: '5G36SQ' },
+    { task: 'Ethereum will be worth $20,000! What is Ethereum?', code: 'emission' },
+    { task: 'Top 10 bitcoin whales: The biggest bitcoin holders revealed! Part 2', code: '27MZ' },
+    { task: 'Secure your crypto: The role of public and private keys', code: '5WH71' },
+    { task: 'How Blockchain ACTUALLY Works | A Simple Explanation For Beginners (12mins)', code: 'marlowe' },
+    { task: 'Secure your crypto: The role of public and private keys | Part 2 (3 mins)', code: '0P6E' }
+];
+
+        function displayTasks(filteredTasks) {
+            const taskList = document.getElementById('task-list');
+            taskList.innerHTML = '';
+
+            if (filteredTasks.length === 0) {
+                taskList.innerHTML = `<div class="task"><span>No tasks found</span></div>`;
+                return;
+            }
+
+            filteredTasks.forEach((item, index) => {
+                const taskDiv = document.createElement('div');
+                taskDiv.className = 'task';
+                taskDiv.innerHTML = `
+                    <span>${index + 1}. ${item.task}</span>
+                    <button onclick="copyToClipboard('${item.code}')"><i class="fas fa-copy"></i> Copy</button>
+                `;
+                taskList.appendChild(taskDiv);
+            });
+        }
+
+        function copyToClipboard(code) {
+            navigator.clipboard.writeText(code).then(() => {
+                showToast(`Copied: ${code}`);
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerText = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        function searchTasks() {
+            const searchInput = document.getElementById('search').value.toLowerCase();
+            const filteredTasks = tasks.filter(task => task.task.toLowerCase().includes(searchInput));
+            displayTasks(filteredTasks);
+        }
+
+        // Initial display
+        displayTasks(tasks);
+    </script>
+</body>
+</html>
