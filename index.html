@@ -74,29 +74,29 @@
             padding: 0;
         }
 
-        /* Adjusted alignment for logo and name */
         .menu ul li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
 
-.menu ul li img {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
+        .menu ul li img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
 
-.menu ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.2em;
-    margin: 0;
-    display: inline-flex;
-    align-items: center;
-}
+        .menu ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin: 0;
+            display: inline-flex;
+            align-items: center;
+        }
 
         /* Search Input */
         input[type="text"] {
@@ -126,7 +126,6 @@
             padding: 15px;
             border-bottom: 1px solid #e1e9ef;
             transition: background 0.3s;
-            text-align: left;
         }
 
         .task:last-child {
@@ -224,14 +223,22 @@
     <div class="menu" id="menu">
         <span class="close-btn" id="closeMenu">&times;</span>
         <ul>
-            <li><a href="https://t.me/Hahucryptoet" target="_blank"><img src="https://i.ibb.co/Nyjtq7B/IMG-20241029-004716-176.jpg" alt="Hahu Crypto">Hahu Crypto</a></li>
-            <li><a href="https://t.me/hahu_Support" target="_blank"><img src="https://i.ibb.co/Nyjtq7B/IMG-20241029-004716-176.jpg" alt="Hahu Support">Hahu Support</a></li>
-            <li><a href="https://t.me/leap10" target="_blank"><img src="https://i.ibb.co/6ByXcTT/IMG-20241028-235223-445.jpg" alt="Dev">Dev &lt;/&gt;</a></li>
+            <li><a href="https://t.me/Hahucryptoet" target="_blank"><img src="https://i.ibb.co/Nyjtq7B/IMG-20241029-004716-176.jpg" alt="Hahu Crypto"> Hahu Crypto</a></li>
+            <li><a href="https://t.me/hahu_Support" target="_blank"><img src="https://i.ibb.co/Nyjtq7B/IMG-20241029-004716-176.jpg" alt="Hahu Support"> Hahu Support</a></li>
+            <li><a href="https://t.me/leap10" target="_blank"><img src="https://i.ibb.co/6ByXcTT/IMG-20241028-235223-445.jpg" alt="Dev"> Dev &lt;/&gt;</a></li>
         </ul>
     </div>
 
     <!-- Main Content -->
     <div class="container">
+        <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+    <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background-color: #eee;">
+        <img src="https://i.ibb.co/Nyjtq7B/IMG-20241029-004716-176.jpg" alt="Image 1" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background-color: #eee;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnyTH33Ds8Z_vpe2LOZEdwXVCYtYl86sVgeA&s" alt="Image 2" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+        </div>
         <h1>Tapswap Cinema Codes</h1>
         <i class="fas fa-sun mood-toggle" id="moodToggle" title="Switch to High Mode"></i>
         <input type="text" id="search" placeholder="Search for tasks..." onkeyup="searchTasks()">
@@ -299,17 +306,11 @@
         }
 
         // Dark Mode Toggle
-        document.getElementById('moodToggle').addEventListener('click', () => {
+        document.getElementById('moodToggle').addEventListener('click', function() {
             document.body.classList.toggle('high-mode');
-
-            const moodIcon = document.getElementById('moodToggle');
-            if (document.body.classList.contains('high-mode')) {
-                moodIcon.classList.replace('fa-sun', 'fa-moon');
-                moodIcon.title = 'Switch to Low Mode';
-            } else {
-                moodIcon.classList.replace('fa-moon', 'fa-sun');
-                moodIcon.title = 'Switch to High Mode';
-            }
+            this.classList.toggle('fa-moon');
+            this.classList.toggle('fa-sun');
+            this.title = document.body.classList.contains('high-mode') ? "Switch to Low Mode" : "Switch to High Mode";
         });
 
         // Hamburger Menu Toggle
@@ -317,15 +318,15 @@
         const menu = document.getElementById('menu');
         const closeMenu = document.getElementById('closeMenu');
 
-        hamburger.addEventListener('click', () => {
+        hamburger.addEventListener('click', function() {
             menu.classList.add('active');
         });
 
-        closeMenu.addEventListener('click', () => {
+        closeMenu.addEventListener('click', function() {
             menu.classList.remove('active');
         });
 
-        // Initialize with all tasks displayed
+        // Initial display of tasks
         displayTasks(tasks);
     </script>
 </body>
